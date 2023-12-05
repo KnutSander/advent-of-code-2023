@@ -1,27 +1,5 @@
 #!/usr/bin/env python3
 
-"""
-" part2.py
-"
-" Your calculation isn't quite right. It looks like some of the digits are 
-" actually spelled out with letters: one, two, three, four, five, six, seven, 
-" eight, and nine also count as valid "digits".
-"
-" Equipped with this new information, you now need to find the real first and 
-" last digit on each line. For example:
-"
-" two1nine
-" eightwothree
-" abcone2threexyz
-" xtwone3four
-" 4nineeightseven2
-" zoneight234
-" 7pqrstsixteen
-"
-" In this example, the calibration values are 29, 83, 13, 24, 42, 14, and 76. 
-" Adding these together produces 281.
-"""
-
 #-------------------------------------------------------------------------------
 # Imports and Global Variables
 #-------------------------------------------------------------------------------
@@ -55,7 +33,7 @@ def extract_numeric_values(parts):
 			numeric_values.append(part)
 		else:
 			# Find matches of spelled-out digits
-			matches = re.findall(r'(one|two|three|four|five|six|seven|eight|nine)', part.lower())
+			matches = re.findall(r'(?=(one|two|three|four|five|six|seven|eight|nine|ten))', part.lower())
 
 			# Convert spelled-out digits to numeric equivalents
 			for match in matches:
@@ -78,11 +56,9 @@ with open('input', 'r') as file:
 
 		# Concatenate the first and last numbers
 		whole_number = int(numeric_values[0] + numeric_values[-1])
-		print(whole_number)
 
 		# Add the number to the total
 		total += whole_number
-
 
 # Print the total
 print("Total sum:", total)
